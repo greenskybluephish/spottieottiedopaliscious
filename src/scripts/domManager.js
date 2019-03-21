@@ -64,8 +64,9 @@ const createSelectElement = () =>
       formSelect.appendChild(buildOptionElement(name, name));
     });
     formFieldSet.appendChild(formSelect);
+    formFieldSet.appendChild()
     playlistContainer.appendChild(formFieldSet);
-  })
+  });
 
 
 const userListDOM = (userArray) => {
