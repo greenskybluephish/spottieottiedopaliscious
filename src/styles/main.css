@@ -1,0 +1,11 @@
+html {
+   background-color: rgb(193, 235, 235);
+}
+
+#navList {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   list-style-type: none;
+   justify-content: space-around;
+}
