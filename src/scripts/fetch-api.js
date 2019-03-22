@@ -61,15 +61,41 @@ const findEachUserList = (arrayObject, userName) => {
 let user1 = "brian"
 let user2 = "chris"
 
-const getShared = () => {
-   getJSONList().then(arrayObject => {
-  let compareObjects = arrayObject.filter(object=> {
-    return (object.user === user1 || object.user === user2)
-  }); let artistArray1 = compareObjects[0].items;
-      let artistArray2 = compareObjects[1].items;
-     
-     ; console.log(bothArray)
-})}
+const bothArray2 = (arrayOne, arrayTwo) => {
+  let newone = arrayOne.map(obj => {
+  let newtwo = arrayTwo.filter(data => {
+     return (data === obj)
+  }); return newtwo
+}); const newGuy = newone.filter(sub => {
+ return sub.length;
+}); console.log(newGuy) ;
+}
+
+
+
+// const getShared = () => {
+//    getJSONList().then(arrayObject => {
+//   let compareObjects = arrayObject.filter(object=> {
+//     return (object.user === user1 || object.user === user2)
+//   }).map(twoObjects => twoItems = twoObjects.items)
+//     return compareObjects; 
+//   }).then(arrayoftwo => {
+//     let newone = arrayoftwo.map(array => { 
+//       let thisone = array.map(obj => {
+//         let newobj = obj.name;
+//         return newobj
+//       }); return thisone});
+//     console.log(newone)})};
+
+// const onetime = getShared()
+// console.log(onetime)
+// .then(bothArray2);
+// const prom = []
+// const aProm = () => {
+//  Promise.all([getDBA(), getDBA2()]).then(values => {
+//    const shared = values[0].filter(e => values[1].indexOf(e) !== -1)
+//    prom.push(shared.slice(0, 5).join())})
+//    return prom;
 
 
 

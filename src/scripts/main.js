@@ -6,8 +6,3 @@ checkAPIforUser();
 
 
 
-
-
-
-
-
