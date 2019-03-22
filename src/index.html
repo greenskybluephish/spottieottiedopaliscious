@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-  <html lang="en">
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./styles/main.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./styles/main.css" />
     <title>Common Ground</title>
-
   </head>
   <body>
-      <ul id="navList">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#artists">Top Artists</a></li>
-          <li><a href="#playlist">Playlist</a></li>
-        </ul>
+    <main class="MainContainer">
+      <nav>
+        <a class="accordion-toggle" href="#userlist-container">Home</a>
+        <a class="accordion-toggle" href="#artist-container">Top Artists</a>
+        <a class="accordion-toggle" href="#shared-container"
+          >Find Shared Artists</a
+        >
+        <a class="accordion-toggle" href="#playlist-container">Playlist</a>
+      </nav>
+      <div class="accordion-content" id="userlist-container"></div>
+      <div id="shared-container" class="accordion-content"></div>
 
-        <main id="playlist-container" class="MainContainer">
-            <div>Playlist</div>
-            <button id='playlist-button'>Create a Playlist</button>
-        <div id="userlist-container">
-          
-        </div>
+      <div class="accordion-content" id="playlist-container">
+        <div>Playlist</div>
+        <button id="playlist-button">Create a Playlist</button>
+      </div>
 
-         </main>
+      <div id="artist-container" class="accordion-content"></div>
+    </main>
 
-        <script src="./scripts/auth.js"></script>
-        <script src="./scripts/fetch-api.js"></script>
-        <script src="./scripts/domManager.js"></script>
-        <script src="./scripts/playlist.js"></script>
-        <script src="./scripts/main.js"></script>
+    <script src="./scripts/auth.js"></script>
+    <script src="./scripts/fetch-api.js"></script>
+    <script src="./scripts/constructor-functions.js"></script>
+    <script src="./scripts/domManager.js"></script>
+    <script src="./scripts/eventhandlers.js"></script>
+    <script src="./scripts/main.js"></script>
   </body>
-  </html>
+</html>
