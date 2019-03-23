@@ -11,6 +11,15 @@ const buildElementWithText = (elementType, elementTextContent) => {
    return htmlElement;
  };
  
+ const buildInputButtonElement = (elementType, elementId) => {
+  let htmlElement = document.createElement("input");
+  htmlElement.type = elementType;
+  htmlElement.id = elementId;
+  return htmlElement;
+};
+
+
+
  const buildButtonElement = (elementId, elementText, elementClass) => {
    let button = document.createElement("button");
    button.id = elementId;

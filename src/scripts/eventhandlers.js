@@ -7,13 +7,18 @@ function handleClick(event) {
 }
 
 function returnUserlist(event) {
+  
+  // while (sharedContainer.firstChild) {
+  //   sharedContainer.removeChild(sharedContainer.firstChild);
+  // }
+  let user1 = window.sessionStorage.getItem("uri");
+  let user2 = document.querySelector("#selectUser").value;
+  getShared(user1, user2);
   let userName = document.querySelector("#selectUser").value;
-  while (artistContainer.firstChild) {
-    artistContainer.removeChild(artistContainer.firstChild);
-  }
   eachObject = getJSONList()
     .then(array => findEachUserList(array, userName))
-    .then(userArray => createArtistDOM(userArray));
+    .then(userArray => createSharedArtistDOM(userArray));
+
 }
 
 //for playlist button

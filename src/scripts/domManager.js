@@ -42,6 +42,7 @@ const createArtistDOM = (array) => {
   arrayObject.forEach(index => {
     let imageBox = document.createElement("figure");
     let caption = buildElementWithText("figcaption", index.name);
+    caption.classList.add("currentUser");
     const smallImage = new Image();
     smallImage.src = index.images[1].url;
     imageBox.appendChild(caption);
@@ -52,6 +53,43 @@ const createArtistDOM = (array) => {
   artistContainer.classList.add("active");
   return artistContainer;
 };
+
+const createSharedArtistDOM = (array) => {
+  let arrayObject = array.items;
+  const list = document.createElement("ol");
+  arrayObject.forEach(index => {
+    let imageBox = document.createElement("figure");
+    let caption = buildElementWithText("figcaption", index.name);
+    caption.classList.add("sharedUser");
+    const smallImage = new Image();
+    smallImage.src = index.images[1].url;
+    imageBox.appendChild(caption);
+    imageBox.appendChild(smallImage);
+    list.appendChild(imageBox);
+  });
+  sharedContainer.appendChild(list);
+  sharedContainer.classList.add("active");
+  return sharedContainer;
+};
+
+const createPlaylistDOM = (object) => {
+  let array = object.artists;
+  const list = document.createElement("ol");
+  array.forEach(index => {
+    let imageBox = document.createElement("figure");
+    let caption = buildElementWithText("figcaption", index.name);
+    caption.classList.add("sharedArtists");
+    const smallImage = new Image();
+    smallImage.src = index.images[1].url;
+    imageBox.appendChild(caption);
+    imageBox.appendChild(smallImage);
+    list.appendChild(imageBox);
+  });
+  playlistContainer.appendChild(list);
+  return playlistContainer;
+};
+
+
 
 const runTheList = () =>
   findAllUsers().then(userArray => {
@@ -78,3 +116,4 @@ findAllURI().then(uriArray => {
     buildAndAppendForm();
   }
 });
+

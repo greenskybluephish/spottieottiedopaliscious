@@ -46,8 +46,12 @@ const postUserList = function(list) {
 };
 
 const getJSONList = () => {
-  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify").then(function(response) {return response.json(); });
-}; 
+  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify").then(function(
+    response
+  ) {
+    return response.json();
+  });
+};
 
 //use getJSONLIST then this function to get data
 
@@ -58,45 +62,57 @@ const findEachUserList = (arrayObject, userName) => {
   return object;
 };
 
-let user1 = "brian"
-let user2 = "chris"
-
-const bothArray2 = (arrayOne, arrayTwo) => {
-  let newone = arrayOne.map(obj => {
-  let newtwo = arrayTwo.filter(data => {
-     return (data === obj)
-  }); return newtwo
-}); const newGuy = newone.filter(sub => {
- return sub.length;
-}); console.log(newGuy) ;
-}
 
 
+const bothArray2 = (arr1, arr2) => {
+  let newone = arr1.filter(obj => {
+    return arr2.includes(obj);
+  });
+  return newone;
+};
 
-// const getShared = () => {
-//    getJSONList().then(arrayObject => {
-//   let compareObjects = arrayObject.filter(object=> {
-//     return (object.user === user1 || object.user === user2)
-//   }).map(twoObjects => twoItems = twoObjects.items)
-//     return compareObjects; 
-//   }).then(arrayoftwo => {
-//     let newone = arrayoftwo.map(array => { 
-//       let thisone = array.map(obj => {
-//         let newobj = obj.name;
-//         return newobj
-//       }); return thisone});
-//     console.log(newone)})};
+const getSpotifyArtists = uri => {
+  return fetch(`https://api.spotify.com/v1/artists?ids=${uri}`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${_token}`,
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json());
+};
 
-// const onetime = getShared()
-// console.log(onetime)
-// .then(bothArray2);
-// const prom = []
-// const aProm = () => {
-//  Promise.all([getDBA(), getDBA2()]).then(values => {
-//    const shared = values[0].filter(e => values[1].indexOf(e) !== -1)
-//    prom.push(shared.slice(0, 5).join())})
-//    return prom;
 
+
+const getShared = (user1, user2) => {
+  getJSONList()
+    .then(arrayObject => {
+      let compareObjects = arrayObject
+        .filter(object => {
+          return object.uri === user1 || object.user === user2;
+        })
+        .map(twoObjects => (twoItems = twoObjects.items));
+      return compareObjects;
+    })
+    .then(arrayoftwo => {
+      let newone = arrayoftwo.map(array => {
+        let thisone = array.map(obj => {
+          let newobj = obj.id;
+          return newobj;
+        });
+        return thisone;
+      });
+      return [newone[0], newone[1]];
+    })
+    .then(data => {
+      let arr1 = data[0];
+      let arr2 = data[1];
+      let combo = bothArray2(arr1, arr2);
+      console.log(combo.join(","));
+      return combo.join(",");
+    })
+    .then(getSpotifyArtists)
+    .then(data => createPlaylistDOM(data));
+};
 
 
 const findEachURIList = (arrayObject, uriName) => {
