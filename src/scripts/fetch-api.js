@@ -36,7 +36,7 @@ const nameUserList = function(top50) {
 };
 
 const postUserList = function(list) {
-  return fetch("http://localhost:8088/Spotify", {
+  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify", {
     method: "POST",
     body: JSON.stringify(list),
     headers: {
@@ -46,7 +46,7 @@ const postUserList = function(list) {
 };
 
 const getJSONList = () => {
-  return fetch("http://localhost:8088/Spotify").then(function(
+  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify").then(function(
     response
   ) {
     return response.json();
