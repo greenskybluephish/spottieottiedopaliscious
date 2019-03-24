@@ -4,7 +4,6 @@ const artistContainer = document.querySelector("#artist-container");
 const sharedContainer = document.querySelector("#shared-container");
 
 const buildAndAppendForm = () => {
-
   let formFieldSet = buildElementWithText("fieldset");
   formFieldSet.appendChild(buildElementWithText("label", "Enter your name "));
   formFieldSet.appendChild(buildInputElement("text", "userName"));
@@ -54,27 +53,29 @@ const createArtistDOM = (array) => {
   return artistContainer;
 };
 
-const createSharedArtistDOM = (array) => {
-  let arrayObject = array.items;
-  const list = document.createElement("ol");
-  arrayObject.forEach(index => {
-    let imageBox = document.createElement("figure");
-    let caption = buildElementWithText("figcaption", index.name);
-    caption.classList.add("sharedUser");
-    const smallImage = new Image();
-    smallImage.src = index.images[1].url;
-    imageBox.appendChild(caption);
-    imageBox.appendChild(smallImage);
-    list.appendChild(imageBox);
-  });
-  sharedContainer.appendChild(list);
-  sharedContainer.classList.add("active");
-  return sharedContainer;
-};
+// const createSharedArtistDOM = (array) => {
+//   let arrayObject = array.items;
+//   const list = document.createElement("ol");
+//   emptyField(sharedContainer);
+//   arrayObject.forEach(index => {
+//     let imageBox = document.createElement("figure");
+//     let caption = buildElementWithText("figcaption", index.name);
+//     caption.classList.add("sharedUser");
+//     const smallImage = new Image();
+//     smallImage.src = index.images[1].url;
+//     imageBox.appendChild(caption);
+//     imageBox.appendChild(smallImage);
+//     list.appendChild(imageBox);
+//   });
+//   sharedContainer.appendChild(list);
+//   sharedContainer.classList.add("active");
+//   return sharedContainer;
+// };
 
-const createPlaylistDOM = (object) => {
+const createSharedDOM = (object) => {
   let array = object.artists;
   const list = document.createElement("ol");
+  emptyField(sharedContainer)
   array.forEach(index => {
     let imageBox = document.createElement("figure");
     let caption = buildElementWithText("figcaption", index.name);
@@ -85,11 +86,9 @@ const createPlaylistDOM = (object) => {
     imageBox.appendChild(smallImage);
     list.appendChild(imageBox);
   });
-  playlistContainer.appendChild(list);
-  return playlistContainer;
+  sharedContainer.appendChild(list);
+  return sharedContainer;
 };
-
-
 
 const runTheList = () =>
   findAllUsers().then(userArray => {
@@ -100,7 +99,7 @@ const runTheList = () =>
       getUserList()
         .then(nameUserList)
         .then(postUserList)
-        .then(createSelectElement)
+        .then(createSelectElement);
     }
   });
 
@@ -116,4 +115,3 @@ findAllURI().then(uriArray => {
     buildAndAppendForm();
   }
 });
-

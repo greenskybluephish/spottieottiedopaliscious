@@ -3,6 +3,8 @@ checkAPIforUser();
 
 
 
+const playlistButton = document.querySelector("#playlist-button");
 
+playlistButton.addEventListener("click", loadPlaylist)
 
 
