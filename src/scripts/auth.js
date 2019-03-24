@@ -38,15 +38,3 @@ const getKey = () => {
 };
 
 getKey();
-
-// const getKey = () => {
-// let localKey = document.cookie.indexOf('accesstoken')
-// if (localKey === null || localKey === -1) {
-
-//   window.location = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`;
-//   document.cookie = `accesstoken=${_token}; max-age=3600`;
-// } else {
-//    _token = document.cookie.replace(/(?:(?:^|.*;\s*)accesstoken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-// }};
-
-// getKey()

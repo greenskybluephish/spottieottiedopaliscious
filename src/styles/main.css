@@ -10,40 +10,36 @@ html {
   justify-content: space-around;
 }
 
-
-
-
 ol {
-   display: flex;
-   flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 figure {
-   width: 180px;
-   justify-content: center;
+  width: 180px;
+  justify-content: center;
 }
 
 img {
-   width: 100%;
-   height: auto;
-   border-radius: 75%;
+  width: 100%;
+  height: auto;
+  border-radius: 75%;
 }
 
 figcaption {
-   text-align: center;
+  text-align: center;
 }
 
-
 .accordion-content {
-   display: none;
-   /* visibility: hidden; */
-   }
+  display: none;
+  /* visibility: hidden; */
+}
 
 .accordion-content.active {
-   display: block;
-   /* visibility: visible; */
-   }
+  display: block;
+  /* visibility: visible; */
+}
 #artist-container.active {
-      display: flex;
-      flex-wrap: wrap;
-   }   
+  display: flex;
+  flex-wrap: wrap;
+}

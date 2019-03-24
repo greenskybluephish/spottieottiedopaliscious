@@ -1,4 +1,4 @@
-//this pulls the artists from the spotify API
+//get the user's basic account info for later reference
 const getUserInfo = () => {
   return fetch("https://api.spotify.com/v1/me", {
     headers: {
@@ -10,10 +10,10 @@ const getUserInfo = () => {
     .then(res => res.json())
     .then(object => {
       window.sessionStorage.setItem("uri", object.id);
-      window.sessionStorage.setItem("name", object.display);
+      window.sessionStorage.setItem("name", object.display_name);
     });
 };
-
+//this pulls the artists from the spotify API
 const getUserList = () => {
   return fetch(
     "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=50",
@@ -36,7 +36,7 @@ const nameUserList = function(top50) {
 };
 
 const postUserList = function(list) {
-  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify", {
+  return fetch("http://localhost:8088/Spotify", {
     method: "POST",
     body: JSON.stringify(list),
     headers: {
@@ -46,7 +46,7 @@ const postUserList = function(list) {
 };
 
 const getJSONList = () => {
-  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify").then(function(
+  return fetch("http://localhost:8088/Spotify").then(function(
     response
   ) {
     return response.json();
@@ -61,8 +61,6 @@ const findEachUserList = (arrayObject, userName) => {
   });
   return object;
 };
-
-
 
 const bothArray2 = (arr1, arr2) => {
   let newone = arr1.filter(obj => {
@@ -80,6 +78,36 @@ const getSpotifyArtists = uri => {
     }
   }).then(res => res.json());
 };
+
+const please = (artists) => {
+  fetch(`https://api.spotify.com/v1/recommendations?limit=20&market=US&seed_artists=${artists}&min_liveness=0.8`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${_token}`,
+      "Content-Type": "application/json"
+    }
+  }).then(response => response.json()).then(data1 => {
+    const uriArray = data1.tracks
+    const uri = uriArray.map(elem => {
+      return elem.uri
+    });
+    return uri.join();
+  }).then(uris => {
+    fetch(`https://api.spotify.com/v1/playlists/3strS5xAxQV0wwSX3MV6Mf/tracks?uris=${uris}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${_token}`,
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+
+  })
+}
+
+
+
+
 
 
 
@@ -107,13 +135,17 @@ const getShared = (user1, user2) => {
       let arr1 = data[0];
       let arr2 = data[1];
       let combo = bothArray2(arr1, arr2);
-      console.log(combo.join(","));
-      return combo.join(",");
+      let combo5 = combo.slice(0,5);
+      window.sessionStorage.setItem("artist",`${combo5.join(",")}`);
+      return combo.join(",")
     })
     .then(getSpotifyArtists)
-    .then(data => createPlaylistDOM(data));
+    .then(data => {
+      createSharedDOM(data);
+      let play = window.sessionStorage.getItem("artist")
+      please(play)
+    });
 };
-
 
 const findEachURIList = (arrayObject, uriName) => {
   let object = arrayObject.find(obj => {
@@ -144,28 +176,7 @@ const findAllURI = () =>
 //    }
 
 // //needs to be split up, fetches recs, then pushes them to playlist
-//  const please = () => {
-//    fetch(`https://api.spotify.com/v1/recommendations?limit=20&market=US&seed_artists=${prom}&min_valence=0.5`, {
-//      headers: {
-//        Accept: "application/json",
-//        Authorization: `Bearer ${_token}`,
-//        "Content-Type": "application/json"
-//      }
-//    }).then(response => response.json()).then(data1 => {
-//      const uriArray = data1.tracks
-//      const uri = uriArray.map(elem => {
-//        return elem.uri
-//      });
-//      return uri.join();
-//    }).then(uris => {
-//      fetch(`https://api.spotify.com/v1/playlists/3strS5xAxQV0wwSX3MV6Mf/tracks?uris=${uris}`, {
-//        headers: {
-//          Accept: "application/json",
-//          Authorization: `Bearer ${_token}`,
-//          "Content-Type": "application/json"
-//        },
-//        method: "POST"
-//      })
 
-//    })
-// }
+
+// let play = window.sessionStorage.getItem("artist")
+// please(play)
