@@ -165,18 +165,3 @@ const findAllURI = () =>
     let userURI = arrayObject.map(obj => (newArray = obj.uri));
     return userURI;
   });
-
-//create array of top 5 artists for creating playlist
-// const prom = []
-// const aProm = () => {
-//  Promise.all([getDBA(), getDBA2()]).then(values => {
-//    const shared = values[0].filter(e => values[1].indexOf(e) !== -1)
-//    prom.push(shared.slice(0, 5).join())})
-//    return prom;
-//    }
-
-// //needs to be split up, fetches recs, then pushes them to playlist
-
-
-// let play = window.sessionStorage.getItem("artist")
-// please(play)
