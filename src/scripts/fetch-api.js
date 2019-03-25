@@ -46,7 +46,13 @@ const postUserList = function(list) {
 };
 
 const getJSONList = () => {
+<<<<<<< HEAD
   return fetch("https://calm-mesa-57338.herokuapp.com/Spotify").then(function(response) {
+=======
+  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify").then(function(
+    response
+  ) {
+>>>>>>> master
     return response.json();
   });
 };
