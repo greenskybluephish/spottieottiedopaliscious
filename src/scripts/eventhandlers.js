@@ -5,25 +5,33 @@ function handleClick(event) {
 }
 
 function returnUserlist(event) {
-  // while (sharedContainer.firstChild) {
-  //   sharedContainer.removeChild(sharedContainer.firstChild);
-  // }
   let user1 = window.sessionStorage.getItem("uri");
   let user2 = document.querySelector("#selectUser").value;
+  if (user1 === user2) {
+    alert("You can't select yourself dummy.")
+  } else {
   getShared(user1, user2);
-  // let userName = document.querySelector("#selectUser").value;
-  // eachObject = getJSONList()
-  //   .then(array => findEachUserList(array, userName))
-  //   .then(userArray => createSharedArtistDOM(userArray));
+
+  }
 }
 
 //for playlist button
 
-const playlistImporter =
-  '<iframe src="https://open.spotify.com/embed/user/8ccdg6p1majd03xmpv0f5z1vl/playlist/3strS5xAxQV0wwSX3MV6Mf" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>';
+// const playlistImporter = () => {
+// let user1 = window.sessionStorage.getItem("uri");
+// let playlistID = window.sessionStorage.getItem("playlist");
+//   let loadPlaylist = `<iframe src="https://open.spotify.com/embed/user/${user1}/playlist/${playlistID}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+//   playlistButton.insertAdjacentHTML("afterend", loadPlaylist)
+// }
 
 function loadPlaylist(event) {
-  playlistButton.insertAdjacentHTML("afterend", playlistImporter)
+  let user1 = window.sessionStorage.getItem("uri");
+let playlistName = document.querySelector("#playlist-name").value;
+if (playlistName.length === 0) {
+createNewPlaylist(user1, "New Playlist");
+} else {
+  createNewPlaylist(user1, playlistName);
+}
 }
 
 document.addEventListener("click", function(event) {

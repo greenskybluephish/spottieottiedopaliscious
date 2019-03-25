@@ -53,24 +53,6 @@ const createArtistDOM = (array) => {
   return artistContainer;
 };
 
-// const createSharedArtistDOM = (array) => {
-//   let arrayObject = array.items;
-//   const list = document.createElement("ol");
-//   emptyField(sharedContainer);
-//   arrayObject.forEach(index => {
-//     let imageBox = document.createElement("figure");
-//     let caption = buildElementWithText("figcaption", index.name);
-//     caption.classList.add("sharedUser");
-//     const smallImage = new Image();
-//     smallImage.src = index.images[1].url;
-//     imageBox.appendChild(caption);
-//     imageBox.appendChild(smallImage);
-//     list.appendChild(imageBox);
-//   });
-//   sharedContainer.appendChild(list);
-//   sharedContainer.classList.add("active");
-//   return sharedContainer;
-// };
 
 const createSharedDOM = (object) => {
   let array = object.artists;
