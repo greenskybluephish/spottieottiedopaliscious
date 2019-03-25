@@ -17,7 +17,7 @@ const authEndpoint = "https://accounts.spotify.com/authorize";
 
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = "80c3cf7bdf244f508df3080b2acd8696";
-const redirectUri = "https://greenskybluephish.github.io/spottieottiedopaliscious/";
+const redirectUri = "http://localhost:8080/";
 const scopes = [
   "user-top-read playlist-modify-public",
   "playlist-modify-private"

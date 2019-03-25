@@ -46,9 +46,7 @@ const postUserList = function(list) {
 };
 
 const getJSONList = () => {
-  return fetch("http://localhost:8088/Spotify").then(function(
-    response
-  ) {
+  return fetch("http://localhost:8088/Spotify").then(function(response) {
     return response.json();
   });
 };
@@ -79,37 +77,40 @@ const getSpotifyArtists = uri => {
   }).then(res => res.json());
 };
 
-const please = (artists) => {
-  fetch(`https://api.spotify.com/v1/recommendations?limit=20&market=US&seed_artists=${artists}&min_liveness=0.8`, {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${_token}`,
-      "Content-Type": "application/json"
-    }
-  }).then(response => response.json()).then(data1 => {
-    const uriArray = data1.tracks
-    const uri = uriArray.map(elem => {
-      return elem.uri
-    });
-    return uri.join();
-  }).then(uris => {
-    fetch(`https://api.spotify.com/v1/playlists/3strS5xAxQV0wwSX3MV6Mf/tracks?uris=${uris}`, {
+const please = artists => {
+  fetch(
+    `https://api.spotify.com/v1/recommendations?limit=20&market=US&seed_artists=${artists}&min_liveness=0.8`,
+    {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${_token}`,
         "Content-Type": "application/json"
-      },
-      method: "POST"
+      }
+    }
+  )
+    .then(response => response.json())
+    .then(data1 => {
+      const uriArray = data1.tracks;
+      const uri = uriArray.map(elem => {
+        return elem.uri;
+      });
+      return uri.join();
     })
-
-  })
-}
-
-
-
-
-
-
+    .then(uris => {
+      let playlistID = window.sessionStorage.getItem("playlist");
+      fetch(
+        `https://api.spotify.com/v1/playlists/${playlistID}/tracks?uris=${uris}`,
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${_token}`,
+            "Content-Type": "application/json"
+          },
+          method: "POST"
+        }
+      );
+    });
+};
 
 const getShared = (user1, user2) => {
   getJSONList()
@@ -135,15 +136,13 @@ const getShared = (user1, user2) => {
       let arr1 = data[0];
       let arr2 = data[1];
       let combo = bothArray2(arr1, arr2);
-      let combo5 = combo.slice(0,5);
-      window.sessionStorage.setItem("artist",`${combo5.join(",")}`);
-      return combo.join(",")
+      let combo5 = combo.slice(0, 5);
+      window.sessionStorage.setItem("artist", `${combo5.join(",")}`);
+      return combo.join(",");
     })
     .then(getSpotifyArtists)
     .then(data => {
       createSharedDOM(data);
-      let play = window.sessionStorage.getItem("artist")
-      please(play)
     });
 };
 
@@ -166,17 +165,33 @@ const findAllURI = () =>
     return userURI;
   });
 
-//create array of top 5 artists for creating playlist
-// const prom = []
-// const aProm = () => {
-//  Promise.all([getDBA(), getDBA2()]).then(values => {
-//    const shared = values[0].filter(e => values[1].indexOf(e) !== -1)
-//    prom.push(shared.slice(0, 5).join())})
-//    return prom;
-//    }
-
-// //needs to be split up, fetches recs, then pushes them to playlist
-
-
-// let play = window.sessionStorage.getItem("artist")
-// please(play)
+const createNewPlaylist = (user, playlistName) => {
+  fetch(`https://api.spotify.com/v1/users/${user}/playlists`, {
+    body: JSON.stringify({
+      name: `${playlistName}`,
+      public: true
+    }),
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${_token}`,
+      "Content-Type": "application/json"
+    },
+    method: "POST"
+  })
+    .then(res => res.json())
+    .then(data => {
+      window.sessionStorage.setItem("playlist", data.id);
+    })
+    .then(news => {
+      let play = window.sessionStorage.getItem("artist");
+      please(play);
+    })
+    .then(now => {
+      setTimeout(function() {
+        let user1 = window.sessionStorage.getItem("uri");
+        let playlistID = window.sessionStorage.getItem("playlist");
+        let loadPlaylist = `<iframe src="https://open.spotify.com/embed/user/${user1}/playlist/${playlistID}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+        playlistButton.insertAdjacentHTML("afterend", loadPlaylist);
+      }, 300);
+    });
+};
