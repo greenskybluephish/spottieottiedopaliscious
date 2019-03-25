@@ -46,13 +46,9 @@ const postUserList = function(list) {
 };
 
 const getJSONList = () => {
-<<<<<<< HEAD
+
   return fetch("https://calm-mesa-57338.herokuapp.com/Spotify").then(function(response) {
-=======
-  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify").then(function(
-    response
-  ) {
->>>>>>> master
+
     return response.json();
   });
 };
@@ -171,6 +167,7 @@ const findAllURI = () =>
     return userURI;
   });
 
+
 const createNewPlaylist = (user, playlistName) => {
   fetch(`https://api.spotify.com/v1/users/${user}/playlists`, {
     body: JSON.stringify({
@@ -201,3 +198,4 @@ const createNewPlaylist = (user, playlistName) => {
       }, 300);
     });
 };
+
