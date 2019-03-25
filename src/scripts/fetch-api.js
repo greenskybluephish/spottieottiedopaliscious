@@ -135,8 +135,8 @@ const getShared = (user1, user2) => {
       return [newone[0], newone[1]];
     })
     .then(data => {
-      let arr1 = data[0];
-      let arr2 = data[1];
+      let arr1 = data[1];
+      let arr2 = data[0];
       let combo = bothArray2(arr1, arr2);
       let combo5 = combo.slice(0, 5);
       window.sessionStorage.setItem("artist", `${combo5.join(",")}`);
