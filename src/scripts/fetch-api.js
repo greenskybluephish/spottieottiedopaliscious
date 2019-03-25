@@ -36,7 +36,7 @@ const nameUserList = function(top50) {
 };
 
 const postUserList = function(list) {
-  return fetch("http://localhost:8088/Spotify", {
+  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify", {
     method: "POST",
     body: JSON.stringify(list),
     headers: {
@@ -46,7 +46,7 @@ const postUserList = function(list) {
 };
 
 const getJSONList = () => {
-  return fetch("http://localhost:8088/Spotify").then(function(response) {
+  return fetch("https://calm-mesa-57338.herokuapp.com/Spotify").then(function(response) {
     return response.json();
   });
 };
@@ -67,7 +67,7 @@ const bothArray2 = (arr1, arr2) => {
   return newone;
 };
 
-const getSpotifyArtists = uri => {
+const getSpotifyArtists = (uri) => {
   return fetch(`https://api.spotify.com/v1/artists?ids=${uri}`, {
     headers: {
       Accept: "application/json",
@@ -77,9 +77,9 @@ const getSpotifyArtists = uri => {
   }).then(res => res.json());
 };
 
-const please = artists => {
+const please = (artists) => {
   fetch(
-    `https://api.spotify.com/v1/recommendations?limit=20&market=US&seed_artists=${artists}&min_liveness=0.8`,
+    `https://api.spotify.com/v1/recommendations?limit=20&market=US&seed_artists=${artists}&min_valence=0.6`,
     {
       headers: {
         Accept: "application/json",
